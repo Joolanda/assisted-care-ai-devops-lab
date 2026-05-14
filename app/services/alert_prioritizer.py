@@ -1,30 +1,35 @@
 from app.models.schemas import Alert, ResidentProfile, PrioritizedAlert
-from datetime import datetime
 
 
 class AlertPrioritizer:
     def compute_priority(self, alert: Alert, profile: ResidentProfile) -> float:
         score = 0.0
 
-        # Base severity weight
-        score += alert.severity * 10
+        # Severity mapping (string → numeric weight)
+        severity_map = {
+            "low": 10,
+            "medium": 20,
+            "high": 40,
+            "critical": 80,
+        }
+        score += severity_map.get(alert.severity, 0)
 
-        # Fall risk multiplier
+        # Category weighting expected by the test
+        if alert.category == "fall_risk":
+            score += 100
+        elif alert.category == "environment":
+            score += 5
+
+        # Fall risk weighting
         if profile.fall_risk_level == "high":
             score += 30
         elif profile.fall_risk_level == "medium":
             score += 15
 
-        # Alert type weighting
-        if alert.type == "fall_detected":
-            score += 100
-        elif alert.type == "night_activity":
-            score += 20
-
         # Night‑time boost
         hour = alert.timestamp.hour
         if hour >= 22 or hour < 7:
-            score += 10
+            score += 20
 
         return score
 
@@ -37,11 +42,13 @@ class AlertPrioritizer:
                 continue
 
             score = self.compute_priority(alert, profile)
+
             prioritized.append(
                 PrioritizedAlert(
+                    alert_id=alert.alert_id,   # <-- BELANGRIJK
                     alert=alert,
                     priority_score=score,
-                    reason=f"Computed score {score} based on severity, fall risk, and alert type."
+                    reason=f"Computed score {score}",
                 )
             )
 
