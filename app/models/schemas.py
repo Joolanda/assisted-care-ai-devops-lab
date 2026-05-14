@@ -6,16 +6,20 @@ from datetime import datetime
 # -----------------------------
 # Resident Profile
 # -----------------------------
+from pydantic import BaseModel, Field
+from typing import Optional
+from datetime import time
+
+
 class ResidentProfile(BaseModel):
-    id: str = Field(..., description="Unique resident identifier")
-    name: Optional[str] = Field(None, description="Resident full name")
-    fall_risk: int = Field(..., ge=0, le=10, description="Fall risk score from 0–10")
-    mobility_level: Literal["low", "medium", "high"] = Field(
-        ..., description="Resident mobility classification"
-    )
-    cognitive_state: Literal["normal", "impaired", "critical"] = Field(
-        ..., description="Cognitive state relevant for alert prioritization"
-    )
+    resident_id: str = Field(..., description="Unique resident identifier")
+    age_group: str = Field(..., description="Age category such as 'elderly'")
+    fall_risk_level: str = Field(..., description="Risk level: low/medium/high")
+    typical_sleep_start: str = Field(..., description="Expected sleep start time, e.g. '22:00'")
+    typical_wakeup_time: str = Field(..., description="Expected wake-up time, e.g. '07:00'")
+    consent_family_notifications: bool = Field(..., description="Whether family can be notified")
+    consent_sensor_monitoring: bool = Field(..., description="Whether sensor monitoring is allowed")
+
 
 
 # -----------------------------
