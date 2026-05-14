@@ -146,7 +146,7 @@ pytest
 - [x] Add first test
 - [x] Add Dockerfile content
 - [x] Add GitHub Actions CI
-- [ ] Fill project-management docs
+- [x] Fill project-management docs
 
 ### v0.2 Sensor and Alert MVP
 
