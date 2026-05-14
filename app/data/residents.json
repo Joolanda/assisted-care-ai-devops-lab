@@ -1,0 +1,59 @@
+{
+  "r1": {
+  "resident_id": "r1",
+  "name": "Anna Müller",
+  "age_group": "elderly",
+  "fall_risk_level": "high",
+  "room_id": "101A",
+  "typical_sleep_start": "21:30",
+  "typical_wakeup_time": "06:30",
+  "consent_family_notifications": true,
+  "consent_sensor_monitoring": true
+}
+,
+  "r2": {
+  "resident_id": "r2",
+  "name": "Karl Schneider",
+  "age_group": "elderly",
+  "fall_risk_level": "medium",
+  "room_id": "102B",
+  "typical_sleep_start": "22:00",
+  "typical_wakeup_time": "07:00",
+  "consent_family_notifications": false,
+  "consent_sensor_monitoring": true
+},
+  "r3": {
+  "resident_id": "r3",
+  "name": "Elisabeth König",
+  "age_group": "adult",
+  "fall_risk_level": "low",
+  "room_id": "103C",
+  "typical_sleep_start": "23:00",
+  "typical_wakeup_time": "08:00",
+  "consent_family_notifications": true,
+  "consent_sensor_monitoring": true
+},
+  "r4": {
+  "resident_id": "r4",
+  "name": "Thomas Becker",
+  "age_group": "adult",
+  "fall_risk_level": "medium",
+  "room_id": "104A",
+  "typical_sleep_start": "22:30",
+  "typical_wakeup_time": "06:00",
+  "consent_family_notifications": true,
+  "consent_sensor_monitoring": true
+},
+  "r5": {
+  "resident_id": "r5",
+  "name": "Maria Hoffmann",
+  "age_group": "elderly",
+  "fall_risk_level": "low",
+  "room_id": "105B",
+  "typical_sleep_start": "20:30",
+  "typical_wakeup_time": "06:00",
+  "consent_family_notifications": false,
+  "consent_sensor_monitoring": false
+}
+}
+
