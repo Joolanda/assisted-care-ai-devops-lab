@@ -37,6 +37,8 @@ class Alert(BaseModel):
 # Prioritized Alert Output
 # -----------------------------
 class PrioritizedAlert(BaseModel):
+    alert_id: str
     alert: Alert
-    priority_score: float = Field(..., description="Computed priority score")
-    reason: str = Field(..., description="Explanation for the prioritization decision")
+    priority_score: float
+    reason: str
+
