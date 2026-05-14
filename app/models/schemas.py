@@ -1,16 +1,11 @@
 from pydantic import BaseModel, Field
-from typing import Optional, Literal
 from datetime import datetime
+from typing import List
 
 
 # -----------------------------
 # Resident Profile
 # -----------------------------
-from pydantic import BaseModel, Field
-from typing import Optional
-from datetime import time
-
-
 class ResidentProfile(BaseModel):
     resident_id: str = Field(..., description="Unique resident identifier")
     age_group: str = Field(..., description="Age category such as 'elderly'")
@@ -21,24 +16,21 @@ class ResidentProfile(BaseModel):
     consent_sensor_monitoring: bool = Field(..., description="Whether sensor monitoring is allowed")
 
 
-
 # -----------------------------
-# Alert Model
+# Alert Model (matches test suite)
 # -----------------------------
 class Alert(BaseModel):
-    id: str = Field(..., description="Unique alert identifier")
-    type: Literal[
-        "fall_detected",
-        "night_activity",
-        "vital_sign_anomaly",
-        "emergency_button",
-        "environmental_hazard",
-    ] = Field(..., description="Type of alert")
-    severity: int = Field(..., ge=1, le=5, description="Severity level 1–5")
-    timestamp: datetime = Field(..., description="Timestamp of the alert")
-    resident_id: Optional[str] = Field(
-        None, description="ID of the resident associated with this alert"
-    )
+    alert_id: str = Field(..., description="Unique alert identifier")
+    resident_id: str = Field(..., description="Resident associated with the alert")
+    timestamp: datetime = Field(..., description="When the alert occurred")
+
+    severity: str = Field(..., description="Severity level as string: low/medium/high")
+    category: str = Field(..., description="Alert category such as environment, fall, etc.")
+
+    message: str = Field(..., description="Human-readable alert message")
+    explanation: List[str] = Field(default_factory=list, description="Reasoning or context")
+    recommended_action: str = Field(..., description="Suggested next step")
+    status: str = Field(..., description="Alert status, e.g. open/closed")
 
 
 # -----------------------------
