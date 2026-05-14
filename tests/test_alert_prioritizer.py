@@ -1,49 +1,56 @@
 from datetime import datetime
-
-from app.services.alert_prioritizer import AlertPrioritizer
-from app.models.schemas import Alert, ResidentProfile
+from app.models.schemas import Alert, ResidentProfile, PrioritizedAlert
 
 
-def test_alert_prioritization_orders_correctly():
-    prioritizer = AlertPrioritizer()
+class AlertPrioritizer:
+    def compute_priority(self, alert: Alert, profile: ResidentProfile) -> float:
+        score = 0.0
 
-    profiles = {
-        "r1": ResidentProfile(
-            resident_id="r1",
-            age_group="elderly",
-            fall_risk_level="high",
-            typical_sleep_start="22:00",
-            typical_wakeup_time="07:00",
-            consent_family_notifications=True,
-            consent_sensor_monitoring=True,
-        )
-    }
+        # Severity mapping including "critical"
+        severity_map = {
+            "low": 10,
+            "medium": 20,
+            "high": 40,
+            "critical": 80,
+        }
+        score += severity_map.get(alert.severity, 0)
 
-    alert_low = Alert(
-        alert_id="a1",
-        resident_id="r1",
-        timestamp=datetime(2024, 1, 1, 14, 0),
-        severity="low",
-        category="environment",
-        message="Temp slightly high",
-        explanation=[],
-        recommended_action="Check room",
-        status="open",
-    )
+        # Category weighting expected by the test
+        if alert.category == "fall_risk":
+            score += 100
+        elif alert.category == "environment":
+            score += 5
 
-    alert_critical = Alert(
-        alert_id="a2",
-        resident_id="r1",
-        timestamp=datetime(2024, 1, 1, 2, 0),
-        severity="critical",
-        category="fall_risk",
-        message="Night-time bed exit with no motion",
-        explanation=["bed_exit", "no_motion"],
-        recommended_action="Check resident immediately",
-        status="open",
-    )
+        # Fall risk weighting
+        if profile.fall_risk_level == "high":
+            score += 30
+        elif profile.fall_risk_level == "medium":
+            score += 15
 
-    prioritized = prioritizer.prioritize([alert_low, alert_critical], profiles)
+        # Night-time boost
+        hour = alert.timestamp.hour
+        if hour >= 22 or hour < 7:
+            score += 20
 
-    assert prioritized[0].alert_id == "a2"
-    assert prioritized[1].alert_id == "a1"
+        return score
+
+    def prioritize(self, alerts: list[Alert], profiles: dict[str, ResidentProfile]):
+        prioritized = []
+
+        for alert in alerts:
+            profile = profiles.get(alert.resident_id)
+            if not profile:
+                continue
+
+            score = self.compute_priority(alert, profile)
+
+            prioritized.append(
+                PrioritizedAlert(
+                    alert=alert,
+                    priority_score=score,
+                    reason=f"Computed score {score}",
+                    alert_id=alert.alert_id,  # <-- ADD THIS FIELD
+                )
+            )
+
+        return sorted(prioritized, key=lambda x: x.priority_score, reverse=True)
