@@ -144,16 +144,16 @@ pytest
 - [x] Add health endpoint
 - [x] Add metrics endpoint
 - [x] Add first test
-- [ ] Add Dockerfile content
-- [ ] Add GitHub Actions CI
-- [ ] Fill project-management docs
+- [x] Add Dockerfile content
+- [x] Add GitHub Actions CI
+- [x] Fill project-management docs
 
 ### v0.2 Sensor and Alert MVP
 
 - [ ] Add Pydantic models
 - [ ] Add simulated sensor event generator
 - [ ] Add anomaly detection
-- [ ] Add alert prioritization
+- [x] Add alert prioritization
 - [ ] Add event and alert API endpoints
 - [ ] Add tests
 
