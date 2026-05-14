@@ -150,7 +150,7 @@ pytest
 
 ### v0.2 Sensor and Alert MVP
 
-- [ ] Add Pydantic models
+- [x] Add Pydantic models
 - [ ] Add simulated sensor event generator
 - [ ] Add anomaly detection
 - [x] Add alert prioritization
@@ -167,9 +167,9 @@ pytest
 
 ### v0.4 DevOps Readiness
 
-- [ ] Add Docker Compose
+- [x] Add Docker Compose
 - [ ] Add improved monitoring
-- [ ] Add CI pipeline with Docker build
+- [x] Add CI pipeline with Docker build
 - [ ] Add architecture documentation
 - [ ] Add future production roadmap
 
