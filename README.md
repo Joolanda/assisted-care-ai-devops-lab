@@ -61,6 +61,8 @@ Implemented:
 - Initial FastAPI application
 - `/health` endpoint
 - `/metrics` endpoint
+- `/alerts` endpoint
+- `/residents/{id}/alerts` endpoint
 - Basic test setup
 - Project structure
 - Initial project-management documentation placeholders
@@ -83,21 +85,22 @@ flowchart TD
 
 ## API Endpoints
 
-Current:
+### Current
 
 | Method | Endpoint | Description |
 |---|---|---|
 | GET | `/` | Service welcome message |
 | GET | `/health` | Health check |
 | GET | `/metrics` | Basic service metrics |
+| GET | `/alerts` | Get prioritized alerts across all residents |
+| GET | `/residents/{resident_id}/alerts` | Get prioritized alerts for a specific resident |
 
-Planned:
+### Planned
 
 | Method | Endpoint | Description |
 |---|---|---|
 | POST | `/events` | Submit sensor event |
 | POST | `/events/batch` | Submit multiple sensor events |
-| GET | `/alerts` | Get prioritized alerts |
 | POST | `/alerts/{alert_id}/acknowledge` | Acknowledge alert |
 | POST | `/ask-care-protocol` | Ask RAG assistant |
 | GET | `/residents/{resident_id}/status` | Resident status summary |
@@ -120,7 +123,7 @@ pip install -e ".[dev]"
 Run the API:
 
 ```bash
-uvicorn [app.main](https://app.main):app --reload
+uvicorn app.main:app --reload
 ```
 
 Open:
@@ -151,10 +154,10 @@ pytest
 ### v0.2 Sensor and Alert MVP
 
 - [x] Add Pydantic models
-- [ ] Add simulated sensor event generator
-- [ ] Add anomaly detection
+- [x] Add simulated sensor event generator
+- [x] Add anomaly detection
 - [x] Add alert prioritization
-- [ ] Add event and alert API endpoints
+- [x] Add event and alert API endpoints
 - [ ] Add tests
 
 ### v0.3 RAG and Responsible AI
