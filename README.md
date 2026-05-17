@@ -32,34 +32,42 @@ This project is:
 
 Goal: demonstrate responsible AI DevOps thinking—**secure architecture**, **privacy awareness**, **explainability**, **basic observability**, and **reliable deployment patterns**.
 
-## Planned Features
+## Example Use Case (Simulated)
 
+Simulated assisted-care facility sensors:
+- bed-mat
+- motion
+- door
+- bathroom motion
+- room climate
+- emergency button
+
+The system detects workflow risks such as:
+- night-time bed exits
+- no motion after bed exit
+- frequent night activity
+- abnormal room climate
+- emergency button events
+
+It then generates **explainable, prioritized alerts** for caregivers.
+
+## Features
+
+### Implemented (v0.1)
 - FastAPI backend
-- Simulated IoT sensor events
-- Bed-mat and motion-sensor anomaly detection
-- Caregiver alert prioritization
-- RAG assistant over care protocols
-- Role-based access control mock
-- Monitoring endpoint
-- Dockerized deployment
-- GitHub Actions CI
-- Project management documentation
-- Security and privacy documentation
-
-## Current Status
-
-Version: `0.1.0`
-
-Implemented:
-
-- Initial FastAPI application
-- `/health` endpoint
-- `/metrics` endpoint
-- `/alerts` endpoint
-- `/residents/{id}/alerts` endpoint
+- Health + metrics endpoints (`/health`, `/metrics`)
+- Alert read endpoints (`/alerts`, `/residents/{resident_id}/alerts`)
 - Basic test setup
-- Project structure
-- Initial project-management documentation placeholders
+- Docker + GitHub Actions CI
+
+### Next (v0.2–v0.4)
+- Simulated IoT sensor events + ingestion endpoints (`POST /events`, `POST /events/batch`)
+- Bed-mat + motion anomaly detection
+- Alert prioritization + acknowledgement (`POST /alerts/{alert_id}/acknowledge`)
+- RAG assistant over care protocols (`POST /ask-care-protocol`)
+- Role-based access control (mock → optional Keycloak integration)
+- Security + privacy documentation
+- Improved observability (structured logs, richer metrics, tracing)
 
 ## Architecture Overview
 
@@ -106,17 +114,7 @@ Create and activate a virtual environment:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-```
-
-Install dependencies:
-
-```bash
 pip install -e ".[dev]"
-```
-
-Run the API:
-
-```bash
 uvicorn app.main:app --reload
 ```
 
@@ -126,7 +124,7 @@ Open:
 http://127.0.0.1:8000/docs
 ```
 
-## Run Tests
+## Tests
 
 ```bash
 pytest
@@ -134,41 +132,29 @@ pytest
 
 ## Roadmap
 
-### v0.1 Foundation
+### v0.1 Foundation (done)
+- Service skeleton + repo structure
+- Health/metrics + initial alert endpoints
+- Docker + CI pipeline
+- Basic tests + documentation placeholders
 
-- [x] Create repository structure
-- [x] Add FastAPI app
-- [x] Add health endpoint
-- [x] Add metrics endpoint
-- [x] Add first test
-- [x] Add Dockerfile content
-- [x] Add GitHub Actions CI
-- [x] Fill project-management docs
+### v0.2 Sensor + Alert MVP
+- Event models + simulated event generator
+- Event ingestion endpoints
+- Detection + prioritization logic wired end-to-end
+- Test coverage for core workflows
 
-### v0.2 Sensor and Alert MVP
-
-- [x] Add Pydantic models
-- [x] Add simulated sensor event generator
-- [x] Add anomaly detection
-- [x] Add alert prioritization
-- [x] Add event and alert API endpoints
-- [ ] Add tests
-
-### v0.3 RAG and Responsible AI
-
-- [ ] Add care protocol documents
-- [ ] Add RAG service
-- [ ] Add role-based access control
-- [ ] Add security and privacy documentation
-- [ ] Add RAG tests
+### v0.3 RAG + Responsible AI
+- Care protocol document set + RAG service
+- Guardrails: “not diagnosis”, transparency notes, prompt boundaries
+- RBAC (mock roles) + security/privacy documentation
+- RAG tests + basic evaluation notes
 
 ### v0.4 DevOps Readiness
+- Docker Compose for local stack
+- Improved observability (structured logs, Prometheus-style metrics, tracing)
+- Architecture docs + “production hardening” notes (scaling, failure modes, data handling)
 
-- [x] Add Docker Compose
-- [ ] Add improved monitoring
-- [x] Add CI pipeline with Docker build
-- [ ] Add architecture documentation
-- [ ] Add future production roadmap
 
 ## Interview Relevance
 
