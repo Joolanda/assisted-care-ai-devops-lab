@@ -1,42 +1,36 @@
 # Assisted Care AI DevOps Lab
 
-A portfolio MVP demonstrating how AI DevOps practices can support responsible, privacy-aware assisted-care workflows.
+A portfolio MVP demonstrating how **AI DevOps practices** can support **responsible, privacy-aware assisted-care workflows**.
 
-The project explores how simulated IoT sensor events, anomaly detection, caregiver alert prioritization, RAG-based care protocol assistance, role-based access control, monitoring and CI/CD can be combined into a production-oriented AI system prototype.
+This project explores how simulated **IoT sensor events**, **anomaly detection**, **caregiver alert prioritization**, (planned) **RAG-based care protocol assistance**, (planned) **RBAC**, **monitoring**, and **CI/CD** can be combined into a **production-oriented system prototype**.
+
+**What this demonstrates (for AI DevOps / MLOps roles)**
+- Event-driven service design (FastAPI) and clear API boundaries
+- Deployment readiness: Docker / Docker Compose and CI with GitHub Actions
+- Operational basics: health + metrics endpoints
+- Responsible AI framing for sensitive domains (privacy awareness, explainability-oriented alerts)
+
+## Current Status
+
+Version: `0.1.0`
+
+Implemented:
+- FastAPI application skeleton
+- `GET /health` and `GET /metrics`
+- `GET /alerts` and `GET /residents/{resident_id}/alerts`
+- basic test setup
+- initial project structure + project-management doc placeholders
 
 ## Responsible AI Framing
 
 This project is:
+- **Not** a medical diagnosis system
+- **Not** a surveillance system
+- **Not** intended to replace caregivers
+- Based on **simulated data only**
+- Designed as a **portfolio + learning MVP**
 
-- not a medical diagnosis system
-- not a surveillance system
-- not intended to replace caregivers
-- based on simulated data only
-- designed as a portfolio and learning MVP
-
-The goal is to demonstrate responsible AI DevOps thinking:
-secure architecture, privacy awareness, explainability, observability and reliable deployment patterns.
-
-## Example Use Case
-
-An assisted-care facility uses simulated sensors such as:
-
-- bed-mat sensors
-- motion sensors
-- door sensors
-- bathroom motion sensors
-- room climate sensors
-- emergency buttons
-
-The system identifies care-workflow risks such as:
-
-- night-time bed exits
-- no motion after bed exit
-- frequent night activity
-- abnormal room climate
-- emergency button events
-
-The system then generates explainable alerts and prioritizes them for caregivers.
+Goal: demonstrate responsible AI DevOps thinking—**secure architecture**, **privacy awareness**, **explainability**, **basic observability**, and **reliable deployment patterns**.
 
 ## Planned Features
 
