@@ -158,13 +158,10 @@ pytest
 
 ## Interview Relevance
 
-This project is designed to support discussion around:
+Designed to support discussion around:
 
-- AI DevOps
-- MLOps and RAG systems
-- IoT/event-driven architecture
-- monitoring and observability
-- secure and privacy-aware AI
-- role-based access control
-- project scoping and delivery
-- responsible AI in sensitive environments
+- AI DevOps / MLOps and RAG systems
+- event-driven IoT architecture
+- observability & operational readiness
+- security, privacy, RBAC/IAM integration
+- reproducibility, CI/CD, delivery scoping
